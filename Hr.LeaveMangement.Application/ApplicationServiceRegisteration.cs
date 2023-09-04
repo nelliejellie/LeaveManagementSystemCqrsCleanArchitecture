@@ -11,7 +11,7 @@ namespace Hr.LeaveMangement.Application
 {
     public static class ApplicationServiceRegisteration
     {
-        public static IServiceCollection AddApplicationService(IServiceCollection services)
+        public static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
