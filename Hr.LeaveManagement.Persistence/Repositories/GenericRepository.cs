@@ -1,6 +1,7 @@
 ﻿using Hr.LeaveManagement.Domain.Common;
 using Hr.LeaveManagement.Persistence.DatabaseContext;
 using Hr.LeaveMangement.Application.Contracts.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,33 @@ namespace Hr.LeaveManagement.Persistence.Repositories
         {
             _context = context;
         }
-        public Task<T> CreateAsync(T entity)
+        public async Task<bool> CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(entity);
+            return await _context.SaveChangesAsync() > 0;
+
         }
 
-        public Task<T> DeleteAsync(T entity)
+        public async Task<bool> DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<List<T>> GetAsync()
+        public async Task<IReadOnlyList<T>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
