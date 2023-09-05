@@ -1,10 +1,12 @@
 using Hr.LeaveManagement.Infrastructure;
 using Hr.LeaveManagement.Persistence;
+using Hr.LeaveMangement.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDataProtection();
+builder.Services.AddApplicationService();
 builder.Services.ConfigureInfrastructureService(builder.Configuration);
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddControllers();

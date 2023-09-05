@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Hr.LeaveManagement.Domain.DTOs.RequestDto
 {
-    public class LeaveTypeDetailDto : BaseDto
+    public class LeaveTypeDetailDto
     {
+        public int Id { get; set; }
         public string? Name { get; set; } = string.Empty;
         public int DefaultDays { get; set; }
         public DateTime? DateCreated { get; set; }

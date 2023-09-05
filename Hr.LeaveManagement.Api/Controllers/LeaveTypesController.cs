@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Hr.LeaveManagement.Domain.DTOs.RequestDto;
+using Hr.LeaveManagement.Domain.Features.LeaveType.Queries.GetAllLeaveTypes;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,11 +17,21 @@ namespace Hr.LeaveManagement.Api.Controllers
         {
             _mediator = mediator;
         }
-        // GET: api/<LeaveTypesController>
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<LeaveTypeDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var leaveTypes = await _mediator.Send(new GetAllLeaveTypesQuery());
+                return leaveTypes.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         // GET api/<LeaveTypesController>/5
