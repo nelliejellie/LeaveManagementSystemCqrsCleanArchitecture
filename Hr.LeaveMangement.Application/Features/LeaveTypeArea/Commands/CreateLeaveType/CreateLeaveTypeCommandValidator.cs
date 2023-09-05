@@ -29,9 +29,10 @@ namespace Hr.LeaveMangement.Application.Features.LeaveTypeArea.Commands.CreateLe
             _leaveTypeRepository = leaveTypeRepository;
         }
 
-        private Task<bool> LeaveTypeNameUnique(CreateLeaveTypeCommand command, CancellationToken token)
+        private async Task<bool> LeaveTypeNameUnique(CreateLeaveTypeCommand command, CancellationToken token)
         {
-            return _leaveTypeRepository.IsLeaveTypeUnique(command.Name);
+            var checker = await _leaveTypeRepository.IsLeaveTypeUnique(command.Name);
+            return checker;
         }
 
     }

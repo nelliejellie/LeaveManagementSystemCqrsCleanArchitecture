@@ -17,9 +17,10 @@ namespace Hr.LeaveMangement.Application.Features.LeaveTypeArea.Commands.CreateLe
         private readonly IMapper _mapper;
         private readonly ILeaveTypeRepository _leaveTypeRepository;
         
-        public CreateLeaveTypeCommandHandler(IMapper _mapper, ILeaveTypeRepository _leaveTypeRepository)
+        public CreateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository)
         {
-            
+            _mapper = mapper;
+            _leaveTypeRepository = leaveTypeRepository;
         }
 
         public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
