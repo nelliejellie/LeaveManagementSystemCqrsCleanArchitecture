@@ -1,3 +1,4 @@
+using Hr.LeaveManagement.Api.Middleware;
 using Hr.LeaveManagement.Infrastructure;
 using Hr.LeaveManagement.Persistence;
 using Hr.LeaveMangement.Application;
@@ -22,6 +23,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
